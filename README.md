@@ -1,79 +1,103 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 단주차 앱 (DanParkApp)
 
-# Getting Started
+단국대학교 죽전캠퍼스 주차장 관리 React Native 앱
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## 📋 프로젝트 개요
 
-## Step 1: Start the Metro Server
+- **플랫폼**: Android (React Native 0.72)
+- **개발 환경**: MacBook Air M1
+- **타겟**: 단국대학교 죽전캠퍼스 주차장 이용자
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## 🛠 기술 스택
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Frontend**: React Native 0.72, TypeScript
+- **상태 관리**: Zustand, React Query, Context API
+- **네비게이션**: React Navigation 6
+- **지도**: react-native-maps
+- **UI 컴포넌트**: react-native-vector-icons, @gorhom/bottom-sheet
+- **HTTP 클라이언트**: Axios
+- **로컬 저장소**: AsyncStorage
 
+
+## 📱 주요 기능
+
+### ✅ 인증 시스템
+- 이메일/비밀번호 로그인
+- 회원가입 (추후 구현)
+- 자동 토큰 갱신
+
+### 🗺 지도 및 검색
+- 실시간 주차장 현황 지도
+- 주차장 검색 (자동완성, 음성 검색)
+- 혼잡도별 필터링 (여유/보통/혼잡/만차)
+- 최근 검색 기록
+
+### ⭐ 즐겨찾기
+- 주차장 즐겨찾기 추가/제거
+- 즐겨찾기 전용 지도 보기
+
+### 🚗 내 주차 관리
+- 주차 위치 저장
+- 주차 시간 기록
+- 학교 반경 벗어날 시 자동 초기화
+
+### 📋 상세 정보
+- 주차장 평면도 (실시간 자리 현황)
+- 길찾기 연동
+- 혼잡도 시각화
+
+## 🏗 프로젝트 구조
+
+```
+DanParkApp/
+├── android/                    # Android 네이티브 코드
+├── src/
+│   ├── components/             # 재사용 가능한 UI 컴포넌트
+│   │   ├── common/            # 공통 컴포넌트
+│   │   ├── map/               # 지도 관련 컴포넌트
+│   │   └── panel/             # 패널 관련 컴포넌트
+│   ├── contexts/              # React Context
+│   ├── navigation/            # 네비게이션 구조
+│   ├── screens/               # 화면 컴포넌트들
+│   ├── services/              # API 서비스
+│   ├── store/                 # 상태 관리 (Zustand)
+│   ├── types/                 # TypeScript 타입 정의
+│   └── utils/                 # 유틸리티 함수들
+├── App.tsx                    # 루트 컴포넌트
+├── index.js                   # 앱 진입점
+└── package.json              # 의존성 관리
+
+
+## 🐛 문제 해결
+
+### Metro 캐시 문제
 ```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+npx react-native start --reset-cache
+cd android && ./gradlew clean && cd ..
 ```
 
-## Step 2: Start your Application
-
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
+### Android 빌드 문제
 ```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+cd android
+./gradlew clean
+cd ..
+npx react-native run-android
 ```
 
-### For iOS
+### M1 Mac 관련 이슈
+- `android/gradle.properties`에 M1 최적화 설정이 포함되어 있습니다
+- Rosetta 사용 시 성능이 저하될 수 있으니 네이티브 ARM64 환경 권장
 
-```bash
-# using npm
-npm run ios
+## 📄 라이선스
 
-# OR using Yarn
-yarn ios
-```
+이 프로젝트는 단국대학교 주차장 관리 시스템의 MVP 버전입니다.
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## 🔄 추후 확장 예정 기능
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
-
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [ ] 회원가입 기능
+- [ ] YOLO 기반 실시간 주차자리 인식
+- [ ] 푸시 알림 시스템
+- [ ] 관리자 페이지
+- [ ] 다국어 지원
+- [ ] 다크 모드
+- [ ] 구글 로그인 연동
